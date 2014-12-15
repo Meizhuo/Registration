@@ -15,10 +15,9 @@
 <div align="center">
 	<h1><?php echo ($title); ?></h1>
 	<div> 
-		您好,<?php echo ($username); ?> | 
-		<a href="/Registration/Admin/Admin/logout/" title="logout">退出</a> 
+		您好,<?php echo ($username); ?> | <a href="/Registration/Admin/Admin/logout/" title="logout">退出</a> 
 	</div>
-	<p>下面是报名名单</p>
+	<p>下面是  <?php echo ($status); ?> 报名名单</p>
 		<div>
 			<form action="/Registration/Admin/Index/index/" method="get">
 				<select name="status">
@@ -38,71 +37,48 @@
 			</form>
 		</div>
 		
-	<div class="content-box-content">
-    	<div class="tab-content default-tab" id="tab1" style="display:block;">
-            <div>下面是ABC</div>
-          </div>
-		
-		
-			<table border="2px">
+			<table border="2px" width="80%" >
             	<thead>
-             	<tr>
-              		<th>
-                 
-                	</th>
-                	<th>姓名</th>
-            	    <th>专业</th>
-       		        <th>年级</th>
-       	       	    <th>电话</th>	 
- 	                <th>意向部门</th>
-              	    <th>简介</th>
-               		<th>操作</th>
-              	</tr>
+	             	<tr style="height:30px">
+	                	<th style="width:10%">姓名</th>
+	            	    <th style="width:15%">专业</th>
+	       		        <th style="width:5%">年级</th>
+	       	       	    <th style="width:10%">电话</th>	 
+	 	                <th style="width:10%">意向部门</th>
+	              	    <th style="width:40%">简介</th>
+	               		<th style="width:10%">操作</th>
+	              	</tr>
             	</thead>
               
             <!-- 表内容部分 -->
-            <tbody>
-              <?php if(is_array($roster_list)): $i = 0; $__LIST__ = $roster_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><!--ThinkPHP: Volist标签主要用于在模板中 循环输出 数据集或者多维数组 -->
-              <tr>
-              	<td></td>
-                <td><?php echo ($vo['name']); ?></td>
-                <td><?php echo ($vo['major']); ?></td>
-                <td><?php echo ($vo['grade']); ?></td>
-                <td><?php echo ($vo['phone']); ?></td>
-                <td><?php echo ($vo['department']); ?></td>
-                <td><?php echo ($vo['intro']); ?></td>
-                <td>
-                  <!-- Icons -->
-                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/2" title="通过">通过</a> 
-                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/3" title="拒绝">拒绝</a> 
-                </td>
-              </tr><?php endforeach; endif; else: echo "" ;endif; ?>                        
-            </tbody>
+	            <tbody>
+	              <?php if(is_array($roster_list)): $i = 0; $__LIST__ = $roster_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><!--ThinkPHP: Volist标签主要用于在模板中 循环输出 数据集或者多维数组 -->
+	              <tr style="height:30px">
+	                <td style="width:10%"><?php echo ($vo['name']); ?></td>
+	                <td style="width:15%"><?php echo ($vo['major']); ?></td>
+	                <td style="width:5%"><?php echo ($vo['grade']); ?></td>
+	                <td style="width:10%"><?php echo ($vo['phone']); ?></td>
+	                <td style="width:10%"><?php echo ($vo['department']); ?></td>
+	                <td style="width:40%"><?php echo ($vo['intro']); ?></td>
+	                <td style="width:10%">
+	                  <!-- Icons -->
+	                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/2" title="通过"><?php echo ($handle); ?></a> 
+	                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/3" title="拒绝"><?php echo ($handle); ?></a> 
+	                </td>
+	              </tr><?php endforeach; endif; else: echo "" ;endif; ?>                        
+	            </tbody>
             
                           <!-- 表尾 -->
-            <tfoot>
-              <tr>
-                <td colspan="7">
-                  <div class="pagination">               	  
-                  	<?php echo ($page_method); ?>
-                  <!--
-                  	<a href="#" title="First Page">&laquo; First</a>
-                  	<a href="#" title="Previous Page">&laquo; Previous</a> 
-                  	<a href="#" class="number" title="1">1</a> 
-                  	<a href="#" class="number" title="2">2</a> 
-                  	<a href="#" class="number current" title="3">3</a> 
-                  	<a href="#" class="number" title="4">4</a> 
-                  	<a href="#" title="Next Page">Next &raquo;</a>
-                  	<a href="#" title="Last Page">Last &raquo;</a> 
-                  -->
-                  </div>                 
-                  <div class="clear"></div>
-                </td>
-              </tr>
-            </tfoot>
+	            <tfoot>
+	              <tr>
+	                <td colspan="7">
+	                  <div class="pagination">               	  
+	                  	<?php echo ($page_method); ?>
+	                  </div>                 
+	                </td>
+	              </tr>
+	            </tfoot>
           </table>
 		</div>
-	</div>
-</div>		
 </body>
 </html>

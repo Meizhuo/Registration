@@ -43,11 +43,11 @@ class RosterModel extends Model{
         return false;
     }
     
-    public function listRoster($range,$first,$list){
+    public function listRoster($range,$firstRow,$pageSize){
         $list=$this->table("enroll_roster r,enroll_department d")
                    ->field("r.*,d.department")
-                   ->where("d.id=r.department AND r.department=%s AND r.status=%s  ",$range['department'],$range['status'])
-                   ->limit($first.','.$list)
+                   ->where("d.id=r.department AND r.department=%s AND r.status=%s",$range['department'],$range['status'])
+                   ->limit($firstRow.','.$pageSize)
                    ->select();
         
 //         echo "<pre>";

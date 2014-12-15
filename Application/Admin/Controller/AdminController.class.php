@@ -54,7 +54,7 @@ class AdminController extends Controller{
         $roster=D('Roster');
         $res=$roster->changeStatus($data);
         if($res){
-            $this->ajaxReturn('succeed');
+            $this->success('操作成功',U('/Admin/Index/index/'));
         }
         $this->ajaxReturn('fail');
     }
