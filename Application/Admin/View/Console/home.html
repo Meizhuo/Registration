@@ -1,0 +1,100 @@
+<extend name="Base/base"/>
+<block name="title">首页</block>
+<block name="main">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-brand" style="font-size: 2em">后台管理系统</p>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a>您好,{$username}</a>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0)" id="btn-logout">退出</a></li>
+            </ul>
+        </nav>
+        <hr style="margin: 0px">
+    </div>
+    <div style="height: 30px;"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <h4>筛选条件</h4>
+                <hr>
+                <div>
+                    <select id="select-status" class="form-control" style="width: 20%;display: inline">
+                        <option value='1'>待审核人选</option>
+                        <option value='2'>通过审核人选</option>
+                        <option value='3'>没通过审核人选</option>
+                    </select>
+
+                    <select id="select-department" class="form-control" style="width: 20%;display: inline">
+                        <option value='1'>移动组</option>
+                        <option value='2'>Web组</option>
+                        <option value='3'>美工组</option>
+                    </select>
+
+
+                </div>
+                <h4>名单 </h4>
+                <hr>
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr style="height:30px">
+                        <th>姓名</th>
+                        <th>专业</th>
+                        <th>年级</th>
+                        <th>电话</th>
+                        <th>意向部门</th>
+                        <th>简介</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                    <!-- 表内容部分 -->
+                    <tbody>
+                    <volist name="roster_list" id="vo"><!--ThinkPHP: Volist标签主要用于在模板中 循环输出 数据集或者多维数组 -->
+                        <tr style="height:30px">
+                            <td>{$vo['name']}</td>
+                            <td>{$vo['major']}</td>
+                            <td>{$vo['grade']}</td>
+                            <td>{$vo['phone']}</td>
+                            <td>{$vo['department']}</td>
+                            <td>{$vo['intro']}</td>
+                            <td>
+                                <!-- Icons -->
+                                <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/2" title="通过">{$handle1}</a>
+                                <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/3" title="拒绝">{$handle2}</a>
+                            </td>
+                        </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="application/javascript">
+        var status = "{$status}" || 1;
+        var department = "{$department}" || 1;
+
+        $('#select-status').val(status);
+        $('#select-department').val(department);
+
+        (function($){
+            $('#btn-logout').on('click',function(){
+                $.get("{:U('Api/User/logout','','')}",function(data){
+                    if(data.code){
+                        location = location;
+                    }else{
+                        alert('退出失败');
+                    }
+                });
+            });
+        })(jQuery);
+    </script>
+
+</block>

@@ -70,4 +70,23 @@ class RosterModel extends AdvModel{
     public function unpass($roster_id){
         return $this->changeStatus($roster_id,self::STATUS_UNPASS);
     }
+
+    public function listRoster($department = NULL,$status = NULL,$page=1,$limit=10){
+        $where = 'd.id=r.department ';
+        if($department){
+            $where .= ' AND r.department='.$department;
+        }
+        if($status){
+            $where .= ' AND r.status=' .$status;
+        }
+        $result  = $this->table("enroll_roster r,enroll_department d")
+                        ->field("r.*,d.department")
+                        ->where($where)
+                        ->limit($page,$limit)
+                        ->select();
+        if(!$result){
+            $result = array();
+        }
+        return $result;
+    }
 } 
