@@ -11,8 +11,6 @@ class AdminController extends Controller{
         $this->display();
     }
     public function registerIndex(){
-        header("Content-Type:text/html; charset=utf-8");
-        
         $this->assign('title','新用户注册');
         $this->display();
     }

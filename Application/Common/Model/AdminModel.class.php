@@ -1,29 +1,32 @@
 <?php
-namespace Admin\Model;
+namespace Common\Model;
 
 use Think\Model;
 class AdminModel extends Model{
     protected $_validate=array(
-        array('username','require','username can not be NULL',0,'regex',1),
-        array('username','','username has been existed',2,'unique',1),
-        array('password','require','password must be existent',0,'regex',3),
-        array('repassword','require','please input password again to confirm',0,'regex',3),
-        array('password','repassword','The two passwords do not match, please re-enter',0,'confirm',3),
+        array('username','require','缺少参数username',0,'regex',self::MODEL_INSERT),
+        array('password','require','缺少参数password',0,'regex',self::MODEL_INSERT),
+        array('username','','username has been existed',2,'unique',self::MODEL_INSERT),
     );
     
     protected $_auto=array(
         array('password','md5',3,'function'),
         array('create_time','time',1,'function')
     );
-    
+
+    /**
+     * 注册
+     * @param $data
+     * @return \multitype
+     */
     public function register($data){
         if($this->create()){
             if($this->add()){
-                return true;
+                return mz_json_success('注册成功');
             }
-            return false;
+            return mz_json_error('注册失败');
         }
-        return false;
+        return mz_json_error($this->getError());
     }
     
     public function login($data){
