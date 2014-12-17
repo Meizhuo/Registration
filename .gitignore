@@ -1,4 +1,4 @@
-.settings
-.idea
+.settings/
+.idea/
 local_config.php
-Runtime
+Runtime/
