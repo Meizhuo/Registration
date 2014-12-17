@@ -4,12 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><?php echo ($title); ?></title>
 
-<link rel="stylesheet" href="/Registration/Public/Css/admin/reset.css" type="text/css" media="screen" />
-<!-- Main Stylesheet -->
-<link rel="stylesheet" href="/Registration/Public/Css/admin/style.css" type="text/css" media="screen" />
-<!-- Invalid Stylesheet. This makes stuff look pretty. Remove it if you want the CSS completely valid -->
-<link rel="stylesheet" href="/Registration/Public/Css/admin/invalid.css" type="text/css" media="screen" />
-
 </head>
 
 <body>
