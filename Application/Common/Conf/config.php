@@ -15,7 +15,6 @@ return array_merge(array(//'配置项'=>'配置值'
     'DB_DEBUG' => TRUE, // 调试模式
     'URL_MODEL' => 2, //URL模式 REWRITE模式
     'URL_CASE_INSENSITIVE' => true, //不区分URL大小写
-    'DEFAULT_MODULE'       =>    'Admin',  // 默认模块
     'LOAD_EXT_FILE' => 'functions', // 自定义加载函数文件
 ), $local_config);
 

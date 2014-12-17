@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `enroll_roster` (
   `phone` varchar(32) NOT NULL COMMENT '电话',
   `department` int(4) NOT NULL COMMENT '意向部门',
   `intro` text COMMENT '简介',
-  `status` int(4) NOT NULL COMMENT '审核状态',
+  `status` int(4) NOT NULL DEFAULT 1 COMMENT '审核状态(1等待2通过3不通过)',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='报名名单表' AUTO_INCREMENT=10 ;
 
