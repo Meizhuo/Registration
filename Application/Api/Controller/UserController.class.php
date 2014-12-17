@@ -6,9 +6,8 @@ class UserController extends  ApiController{
 
 
     public function login(){
-//        echo __METHOD__;
-//        c();
-        echo "233";
+        $this->reqPost(array('username','password'));
+        $this->ajaxReturn(D('Admin')->login(I('post.username'),I('post.password')));
     }
 
     public function register(){

@@ -6,7 +6,7 @@ class AdminModel extends Model{
     protected $_validate=array(
         array('username','require','缺少参数username',0,'regex',self::MODEL_INSERT),
         array('password','require','缺少参数password',0,'regex',self::MODEL_INSERT),
-        array('username','','username has been existed',2,'unique',self::MODEL_INSERT),
+        array('username','','用户名已存在',2,'unique',self::MODEL_INSERT),
     );
     
     protected $_auto=array(
@@ -28,20 +28,24 @@ class AdminModel extends Model{
         }
         return mz_json_error($this->getError());
     }
-    
-    public function login($data){
-        $where="username= '".$data['username']."' AND password='".md5($data['password'])."'";
-//         echo $where;
-        $res=$this->where($where)->find();
-//         echo "<pre>";
-//         var_dump($res);
-//         echo "</pre>";
-//         exit;
-        unset($res['password']);//这里是不可以$res=unset()这样的，因为unset() 不再是一个真正的函数：它现在是一个语句。这样就没有了返回值，试图获取 unset() 的返回值将导致解析错误。
-        if($res){
-            return $res;
+
+    /**
+     * 登陆
+     * @param $username
+     * @param $password
+     * @return \multitype
+     */
+    public function login($username,$password){
+        $where['username'] = $username;
+        $users = $this->where($where)->limit(1)->select();
+        if($users) {
+            if($users[0]['password'] == md5($password)){
+                return mz_json_success();
+            }
+            return mz_json_error('密码不正确');
         }
-        return false;
+        return mz_json_error('用户不存在');
+
     }
     
     
