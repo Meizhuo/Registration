@@ -3,8 +3,9 @@ namespace Api\Controller;
 
 use Common\Controller\ApiController;
 class UserController extends  ApiController{
-
-
+    /**
+     * 登陆
+     */
     public function login(){
         $this->reqPost(array('username','password'));
         $result = D('Admin')->login(I('post.username'),I('post.password'));
@@ -14,9 +15,20 @@ class UserController extends  ApiController{
         }
         $this->ajaxReturn($result);
     }
-
+    /**
+     *登出
+     */
+    public function logout(){
+        session(null);
+        $this->ajaxReturn(mz_json_success());
+    }
+    /**
+     * 注册
+     */
     public function register(){
         $this->reqPost(array('username','password'));
         $this->ajaxReturn(D('Admin')->register(I('post.')));
     }
+
+
 } 
