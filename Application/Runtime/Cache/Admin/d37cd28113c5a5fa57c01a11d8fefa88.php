@@ -1,32 +1,64 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<title><?php echo ($title); ?></title>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>注册</title>
+    
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    
 </head>
-
 <body>
-	<div align="center">
-		<form action="/Registration/Admin/Admin/register" method="POST">
-			<p>
-				<label>用户名</label>
-				<input class="text-input" type="text" name="username"/>
-			</p>
-			
-			<p>
-		        <label>密码</label>
-		        <input class="text-input" type="password" name="password"/>
-		    </p>
-		    
-		    <p>
-		        <label>确认密码</label>
-		        <input class="text-input" type="password" name="repassword"/>
-		    </p>
-		    
-		    <p>
-		     		<input class="button" type="submit" value="提交"/>
-		    </p>
-	    </form>
-	</div>
+
+
+
+
+    <div style="text-align: center;margin-top: 40px">
+        <p>
+            <label>用户名</label>
+            <input class="text-input" type="text" id="username" placeholder="请输入用户名"/>
+        </p>
+
+        <p>
+            <label>密码</label>
+            <input class="text-input" type="password" id="password" placeholder="请输入密码"/>
+        </p>
+
+        <p>
+            <label>确认密码</label>
+            <input class="text-input" type="password" id="repassword" placeholder="请再次输入"/>
+        </p>
+        <button class="btn btn-primary" id="btn-submit">提交</button>
+        <a href="<?php echo U('Admin/Admin/loginIndex');?>">已有账号,登陆</a>
+    </div>
+    <script type="application/javascript">
+        (function ($) {
+            $('#btn-submit').on('click', function () {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var repassword = $('#repassword').val();
+
+                if (password !== repassword) {
+                    alert('两个密码不一致');
+                    return;
+                }
+
+                if(username === ''){
+                    alert('用户名不能为空');
+                    return;
+                }
+
+                $.post("<?php echo U('Api/User/register','','');?>", {
+                    username: username,
+                    password: password
+                }, function (data) {
+                    console.log(data);
+                }, 'json');
+            });
+        })(jQuery);
+    </script>
+
+
+
 </body>
 </html>
