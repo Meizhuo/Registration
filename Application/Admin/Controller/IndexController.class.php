@@ -1,11 +1,10 @@
 <?php
 namespace Admin\Controller;
-use Think\Controller;
-class IndexController extends Controller {
+use Common\Controller\BaseAdminController;
+
+class IndexController extends BaseAdminController {
     public function index(){
-        header("Content-Type:text/html;charset=utf-8");
-        
-        if(session('?username')){
+        $this->reqLogin();
             //$this->assign('username',session('username'));
             
             $roster=D('Roster');
@@ -50,7 +49,6 @@ class IndexController extends Controller {
             
             $this->assign($assign);
             $this->display();
-        }
-        
+
     }
 }
