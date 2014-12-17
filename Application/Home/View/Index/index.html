@@ -1,126 +1,95 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>{$title}</title>
-
-<script type="text/javascript" >
-    function checkForm(){
-        if($("input[name=name]").val()=="")
-        {
-            alert("请填写姓名");
-            return;
+<extend name="Base/base"/>
+<block name="main">
+    <style>
+        body {
+            background-color: #EDEFF1;
         }
-        if($("input[name=major]").val()=="")
-        {
-            alert("请填写专业");
-            return;
-        }
-        if($("input[name=tel]").val()=="")
-        {
-            alert("请填写联系方式");
-            return;
-        }
-        if(trim(document.getElementById("description").value)=="")
-        {
-            alert("请填写个人简介");
-            return;
-        }
-        if(!confirm("已经认真填写所有资料？"))
-            return;
-        else
-            $("form#reg").get(0).submit();
-    }
-    function trim(str){   
-        str = str.replace(/^(\s|\u00A0)+/,'');   
-        for(var i=str.length-1; i>=0; i--){   
-            if(/\S/.test(str.charAt(i))){   
-                str = str.substring(0, i+1);   
-                break;   
-            }   
-        }   
-        return str;
-	}
-</script>
-    
-</head>
 
-<body>
-
-<div>
-
-  	<div>
-    	<h1>{$title}</h1>
-    	<!-- Logo (221px width) -->
-    	
+        .form {
+            border: 1px solid #DDD;
+            background: #fff;
+            border-radius: 6px;
+            padding: 8px;
+            height: auto;
+            margin-top: 14px;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                <div class="form">
+                    <div class="form-group text-center">
+                        <h3>袂卓工作室招新报名表</h3>
+                        <hr>
+                    </div>
+                    <div class="form-group">
+                        <label>姓 名</label>
+                        <input class="form-control" id="name" placeholder="请输入真是姓名">
+                    </div>
+                    <div class="form-group">
+                        <label>学 号</label>
+                        <input class="form-control" id="student_id" placeholder="你的学号">
+                    </div>
+                    <div class="form-group">
+                        <label>专 业</label>
+                        <input class="form-control" id="major" placeholder="你的专业">
+                    </div>
+                    <div class="form-group">
+                        <label>长/短号</label>
+                        <input class="form-control" id="phone" placeholder="请尽量填写短号">
+                    </div>
+                    <div class="form-group">
+                        <label>年 级</label>
+                        <select id="grade" class="form-control">
+                            <option value="大一">大一</option>
+                            <option value="大二">大二</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>意向部门</label>
+                        <select id="department" class="form-control">
+                            <option value="1">移动组</option>
+                            <option value="2">Web组</option>
+                            <option value="3">美工组</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>简介</label>
+                        <textarea id="intro" rows="3" class="form-control"
+                                  placeholder="请尽量多填写，以便我们更容易了解你"></textarea>
+                    </div>
+                    <button type="button" id="btn-submit" class="btn btn-default btn-lg btn-block">提 交 申 请</button>
+                </div>
+            </div>
+        </div>
     </div>
-    
-   	<!-- Form表单 -->
-  	<div style="width:50%;" align="center"> 
-    	<form action="__APP__/Home/Roster/add/" method="POST">
-      		<table style="width:100%;">
-	      		<tr>
-	        		<th><label>姓名</label></th>
-	        		<th><input style="width:85%;" type="text"  name="name"/></th>
-	        	</tr>
-	        	<div class="clear"></div>
-	        	<tr>
-	        		<th><label>学号</label></th>
-	        		<th><input style="width:85%;" type="text"  name="student_id"/></th>
-	        	</tr>
-	        	<div class="clear"></div>
-	        	<tr>	
-	        		<th><label>专业</label></th>
-	        		<th><input style="width:85%;" type="text"  name="major"/></th>
-	        	</tr>
-	        	<div class="clear"></div>
-	        	<tr>
-	        		<th><label>长/短号</label></th>
-	        		<th><input style="width:85%;" type="text"  name="phone"/></th>
-	        	</tr>
-	        	<div class="clear"></div>
-	        	<tr>
-	        		<th><label>年级</label></th>
-	        		<th>
-	        			<select name="grade" style="width:85%;">
-	        				<option value="大一">大一</option>
-	        				<option value="大二">大二</option>
-	        			</select>
-	        		</th>
-	        		
-	        	</tr>
-	        	<div class="clear"></div>
-	        	<tr>
-	        		<th><label>意向部门</label></th>
-		        	<th>
-		        		<select name="department" style="width:85%;">
-		        			<option value="1">移动组</option>
-		        			<option value="2">Web组</option>
-		        			<option value="3">美工组</option>
-		        		</select>
-	        		</th>
-	        	</tr>
-	        	<div class="clear"></div>
-	        	<tr>
-	        		<th><label>简介:</label></th>
-	        		<th>
-		        		<textarea rows="5" style="width:85%;" name="intro">
-		        		
-		        		</textarea>
-	        		</th>
-	      		</tr>
-	      		
-	      		<div class="clear"></div>
-	      		
-	      		<tr>
-	        		<th colspan="2"><button style="width:100%; height:40px;" type="submit">Join Us!</button></th>
-	      		</tr>
-      		</table>
-    	</form>
-    	
-	</div>
 
-</div>
-</body>
-</html>
+    <script type="application/javascript">
+        (function ($) {
+
+
+            $('#btn-submit').on('click', function () {
+                var name = $('#name').val();
+                var student_id = $('#student_id').val();
+                var major = $('#major').val();
+                var phone = $('#phone').val();
+                var grade = $('#grade').val();
+                var department = $('#department').val();
+                var intro = $('#intro').val();
+
+                var d = {
+                    name: name,
+                    student_id: student_id,
+                    major: major,
+                    phone: phone,
+                    grade: grade,
+                    department: department,
+                    intro: intro
+                }
+//            $.post("{:U('Api')}")
+                console.log(d);
+            });
+
+        })(jQuery);
+    </script>
+</block>
