@@ -24,7 +24,9 @@ class AdminController extends Controller{
         if($res){
             $this->success('succeed to register',U('/Admin/Admin/loginIndex/'));
         }
-        $this->error($admin->getError());
+        else{
+            $this->error($admin->getError());
+        }
     }
     
     public function login(){
@@ -49,15 +51,14 @@ class AdminController extends Controller{
     
     public function audit(){
         $data=I('get.');
-//         var_dump($data);
-//         exit;
         $roster=D('Roster');
         $res=$roster->changeStatus($data);
         if($res){
             $this->success('操作成功',U('/Admin/Index/index/'));
         }
-        $this->ajaxReturn('fail');
+        else{
+        $this->error('fail');
+        }
     }
-    
     
 }

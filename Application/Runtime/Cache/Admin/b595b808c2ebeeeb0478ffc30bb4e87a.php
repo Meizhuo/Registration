@@ -17,7 +17,6 @@
 	<div> 
 		您好,<?php echo ($username); ?> | <a href="/Registration/Admin/Admin/logout/" title="logout">退出</a> 
 	</div>
-	<p>下面是  <?php echo ($status); ?> 报名名单</p>
 		<div>
 			<form action="/Registration/Admin/Index/index/" method="get">
 				<select name="status">
@@ -33,8 +32,10 @@
 					<option value='3'>美工组</option>
 				</select>
 				
-				<input type="submit" value="确定" />
+			<input type="submit" value="确定" />
 			</form>
+			
+			<p>下面是  <?php echo ($status); ?> 报名名单 </p>
 		</div>
 		
 			<table border="2px" width="80%" >
@@ -62,8 +63,8 @@
 	                <td style="width:40%"><?php echo ($vo['intro']); ?></td>
 	                <td style="width:10%">
 	                  <!-- Icons -->
-	                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/2" title="通过"><?php echo ($handle); ?></a> 
-	                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/3" title="拒绝"><?php echo ($handle); ?></a> 
+	                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/2" title="通过"><?php echo ($handle1); ?></a> 
+	                  <a href="/Registration/Admin/Admin/audit/id/<?php echo ($vo['id']); ?>/status/3" title="拒绝"><?php echo ($handle2); ?></a> 
 	                </td>
 	              </tr><?php endforeach; endif; else: echo "" ;endif; ?>                        
 	            </tbody>

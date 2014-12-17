@@ -25,7 +25,6 @@ class RosterModel extends Model{
             }
             return false;
         }
-        
         return false;
     }
     
@@ -34,12 +33,8 @@ class RosterModel extends Model{
             if($this->save()){
                 return true;
             }
-
             return false;
-            
         }
-//         echo "2";
-//         exit;
         return false;
     }
     
@@ -50,11 +45,10 @@ class RosterModel extends Model{
                    ->limit($firstRow.','.$pageSize)
                    ->select();
         
-//         echo "<pre>";
-//         var_dump($list);
-//         echo "</pre>";
-//         exit;
-        
+//             $list=$this->table("enroll_viewstatus")
+//                         ->where("d.id=r.department AND r.department=%s AND r.status=%s",$range['department'],$range['status'])
+//                         ->limit($firstRow.','.$pageSize)
+//                         ->select();
         if($list){
             return $list;
         }

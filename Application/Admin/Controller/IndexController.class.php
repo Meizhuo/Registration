@@ -31,6 +31,8 @@ class IndexController extends Controller {
             switch ($range['status']){
                 case 1:
                     $assign['status']='待审核人选';
+                    $assign['handle1']='通过';
+                    $assign['handle2']='拒绝';
                     break;
                 case 2:
                     $assign['status']='通过审核人选';
@@ -43,6 +45,7 @@ class IndexController extends Controller {
             $assign['roster_count']=$count;
             $assign['roster_list']=$list;//把$list这整一个列表分配给roster_list
             $assign['title']='后台管理系统';
+           
             $assign['page_method']=$show;
             
             $this->assign($assign);

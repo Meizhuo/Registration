@@ -17,7 +17,6 @@
 	<div> 
 		您好,{$username} | <a href="__APP__/Admin/Admin/logout/" title="logout">退出</a> 
 	</div>
-	<p>下面是  {$status} 报名名单</p>
 		<div>
 			<form action="__APP__/Admin/Index/index/" method="get">
 				<select name="status">
@@ -33,8 +32,10 @@
 					<option value='3'>美工组</option>
 				</select>
 				
-				<input type="submit" value="确定" />
+			<input type="submit" value="确定" />
 			</form>
+			
+			<p>下面是  {$status} 报名名单 </p>
 		</div>
 		
 			<table border="2px" width="80%" >
@@ -62,8 +63,8 @@
 	                <td style="width:40%">{$vo['intro']}</td>
 	                <td style="width:10%">
 	                  <!-- Icons -->
-	                  <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/2" title="通过">{$handle}</a> 
-	                  <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/3" title="拒绝">{$handle}</a> 
+	                  <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/2" title="通过">{$handle1}</a> 
+	                  <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/3" title="拒绝">{$handle2}</a> 
 	                </td>
 	              </tr>  
 	              </volist>                        
