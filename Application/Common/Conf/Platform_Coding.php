@@ -1,6 +1,6 @@
 <?php
 //部署到coding 的配置
-array(//'配置项'=>'配置值'
+return array(//'配置项'=>'配置值'
     'DB_TYPE' => 'mysql', // 数据库类型
     'DB_HOST' => '10.9.1.188', // 服务器地址
     'DB_NAME' => 'enroll', // 数据库名
