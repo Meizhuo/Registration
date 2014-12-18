@@ -3,6 +3,10 @@ $local_config = array();
 if (file_exists(CONF_PATH . 'local_config.php')) {
     $local_config  = require_once(CONF_PATH . 'local_config.php');
 }
+
+if(getenv('Platform_Coding') == '1'){
+    $local_config = require_once(CONF_PATH . 'Platform_Coding.php');
+}
 return array_merge(array(//'配置项'=>'配置值'
     'DB_TYPE' => 'mysql', // 数据库类型
     'DB_HOST' => 'localhost', // 服务器地址
