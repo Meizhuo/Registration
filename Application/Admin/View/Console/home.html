@@ -41,43 +41,69 @@
                 </div>
                 <h4>名单 </h4>
                 <hr>
+                <volist name="roster_list" id="vo">
+                    <table ellspacing="0" class="table table-bordered table-hover col-md-10 col-md-offset-2"
+                           style="width: 60%">
+                        <tbody>
 
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr style="height:30px">
-                        <th>姓名</th>
-                        <th>专业</th>
-                        <th>年级</th>
-                        <th>电话</th>
-                        <th>意向部门</th>
-                        <th>简介</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-
-                    <!-- 表内容部分 -->
-                    <tbody>
-                    <volist name="roster_list" id="vo"><!--ThinkPHP: Volist标签主要用于在模板中 循环输出 数据集或者多维数组 -->
-                        <tr style="height:30px">
+                        <tr>
+                            <td><strong>姓名</strong></td>
                             <td>{$vo['name']}</td>
+                            <td><strong>专业</strong></td>
                             <td>{$vo['major']}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>年级</strong></td>
                             <td>{$vo['grade']}</td>
+                            <td><strong>联系方式</strong></td>
                             <td>{$vo['phone']}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>加入意向</strong></td>
                             <td>{$vo['department']}</td>
-                            <td>{$vo['intro']}</td>
-                            <td>
-                                <!-- Icons -->
-                                <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/2" title="通过">{$handle1}</a>
-                                <a href="__APP__/Admin/Admin/audit/id/{$vo['id']}/status/3" title="拒绝">{$handle2}</a>
+                            <td><strong>申请序号</strong></td>
+                            <td>{$vo['id']}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <strong>个人简介</strong>
                             </td>
                         </tr>
-                    </volist>
-                    </tbody>
-                </table>
+                        <tr>
+                            <td colspan="4" style="text-align:left;"><br>
+                                {$vo['intro']}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>审核状态</strong>
+                            </td>
+                            <td>
 
-                <div class="btn-group">
+                                <switch name="vo.status">
+                                    <case value='1'><span class="label label-warning">待审核</span></case>
+                                    <case value='2'><span class="label label-success">通过</span></case>
+                                    <default/>
+                                    <span class="label label-default">不通过</span>
+                                </switch>
+                            </td>
+                            <td style="text-align: center;">
+                                <if condition="$vo['status'] eq 1 ">
+                                    <button name="btn-pass" class="btn btn-default" data-id="{$vo['id']}">进入面试</button>
+                                </if>
+                            </td>
+                            <td style="text-align: center;">
+                                <if condition="$vo['status'] eq 1 ">
+                                    <button name="btn-unpass" class="btn btn-default" data-id="{$vo['id']}">取消面试</button>
+                                </if>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </volist>
+                <div class="btn-group col-md-10 col-md-offset-4 ">
                     <button type="button" class="btn btn-default" id="btn-pre">上一页</button>
-                    <button type="button" class="btn btn-default" disabled="disabled" >{$page | default=1}</button>
+                    <button type="button" class="btn btn-default" disabled="disabled">{$page | default=1}</button>
                     <button type="button" class="btn btn-default" id="btn-next">下一页</button>
                 </div>
             </div>
@@ -87,48 +113,78 @@
         var status = "{$status}" || 1;
         var department = "{$department}" || 1;
         var page = parseInt("{$page}") || 1;
-//        var limit = "{$limit}" || 10;
+        //        var limit = "{$limit}" || 10;
         var tpl = location.pathname + "?status={status}&department={department}&page={page}";
 
-        (function($){
+        (function ($) {
             //初始化选择栏
             $('#select-status').val(status);
             $('#select-department').val(department);
 
-            $('#btn-logout').on('click',function(){
-                $.get("{:U('Api/User/logout','','')}",function(data){
-                    if(data.code){
+            $('#btn-logout').on('click', function () {
+                $.get("{:U('Api/User/logout','','')}", function (data) {
+                    if (data.code) {
                         location = location;
-                    }else{
+                    } else {
                         alert('退出失败');
                     }
                 });
             });
 
-            $('#select-status').on('change',function(){
-                var url = tpl.replace('{status}',$(this).val()).replace('{department}',department).replace('{page}',1);
+            $('#select-status').on('change', function () {
+                var url = tpl.replace('{status}', $(this).val()).replace('{department}', department).replace('{page}', 1);
                 console.log(url);
                 location = url;
             });
 
-            $('#select-department').on('change',function(){
-                var url = tpl.replace('{status}',status).replace('{department}',$(this).val()).replace('{page}',1);
+            $('#select-department').on('change', function () {
+                var url = tpl.replace('{status}', status).replace('{department}', $(this).val()).replace('{page}', 1);
                 console.log(url);
                 location = url;
             });
 
-            $('#btn-pre').on('click',function(){
-                page =  page-1 >0? page:1;
-                var url = tpl.replace('{status}',status).replace('{department}',department).replace('{page}',page);
+            $('#btn-pre').on('click', function () {
+                page = page - 1 > 0 ? page - 1 : 1;
+                var url = tpl.replace('{status}', status).replace('{department}', department).replace('{page}', page);
                 console.log(url);
                 location = url;
             });
 
-            $('#btn-next').on('click',function(){
-                page =  page + 1;
-                var url = tpl.replace('{status}',status).replace('{department}',department).replace('{page}',page);
+            $('#btn-next').on('click', function () {
+                page = page + 1;
+                var url = tpl.replace('{status}', status).replace('{department}', department).replace('{page}', page);
                 console.log(url);
                 location = url;
+            });
+
+            $('[name=btn-pass]').on('click',function(){
+                var d = {
+                    'id' : $(this).data('id')
+                };
+
+                $.post("{:U('Api/Roster/pass','','')}",d,function(data){
+                    console.log(data);
+                    if(data.code){
+                        location = location;
+                    }else{
+                        alert('操作失败');
+                    }
+                });
+            });
+
+            $('[name=btn-unpass]').on('click',function(){
+                var d = {
+                    'id' : $(this).data('id')
+                };
+
+                $.post("{:U('Api/Roster/unpass','','')}",d,function(data){
+                    console.log(data);
+                    if(data.code){
+                        location = location;
+                    }else{
+                        alert('操作失败');
+                    }
+                });
             });
         })(jQuery);
     </script>
