@@ -65,8 +65,14 @@
     </div>
 
     <script type="application/javascript">
+        var isSubmiting = false;
         (function ($) {
             $('#btn-submit').on('click', function () {
+                if(isSubmiting){
+                    return;
+                }
+                isSubmiting = true;
+
                 var name = $('#name').val();
                 var student_id = $('#student_id').val();
                 var major = $('#major').val();
@@ -89,8 +95,10 @@
                             alert('报名已提交!');
                             location = location ;
                         }else{
-                            alert(data.msg);
+                            alert('报名失败，有人要要被扣工资了！');
                         }
+                }).done(function(){
+                    isSubmiting = false;
                 });
             });
 
