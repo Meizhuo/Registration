@@ -18,7 +18,12 @@ CREATE TABLE IF NOT EXISTS `enroll_department` (
   `id` int(4) NOT NULL AUTO_INCREMENT COMMENT '部门id标识号',
   `department` varchar(32) NOT NULL COMMENT '部门名字',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='部门表' AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='部门表' AUTO_INCREMENT=1 ;
+
+INSERT INTO `enroll_department` (`id`, `department`) VALUES
+  (1, '移动组'),
+  (2, 'Web组'),
+  (3, '美工组');
 
 
 DROP  TABLE IF EXISTS `enroll_roster`;
@@ -33,4 +38,4 @@ CREATE TABLE IF NOT EXISTS `enroll_roster` (
   `intro` text COMMENT '简介',
   `status` int(4) NOT NULL DEFAULT 1 COMMENT '审核状态(1等待2通过3不通过)',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='报名名单表' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='报名名单表' AUTO_INCREMENT=1 ;
