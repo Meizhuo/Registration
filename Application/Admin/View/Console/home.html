@@ -74,17 +74,27 @@
                     </volist>
                     </tbody>
                 </table>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" id="btn-pre">上一页</button>
+                    <button type="button" class="btn btn-default" disabled="disabled" >{$page | default=1}</button>
+                    <button type="button" class="btn btn-default" id="btn-next">下一页</button>
+                </div>
             </div>
         </div>
     </div>
     <script type="application/javascript">
         var status = "{$status}" || 1;
         var department = "{$department}" || 1;
-
-        $('#select-status').val(status);
-        $('#select-department').val(department);
+        var page = parseInt("{$page}") || 1;
+//        var limit = "{$limit}" || 10;
+        var tpl = location.pathname + "?status={status}&department={department}&page={page}";
 
         (function($){
+            //初始化选择栏
+            $('#select-status').val(status);
+            $('#select-department').val(department);
+
             $('#btn-logout').on('click',function(){
                 $.get("{:U('Api/User/logout','','')}",function(data){
                     if(data.code){
@@ -93,6 +103,32 @@
                         alert('退出失败');
                     }
                 });
+            });
+
+            $('#select-status').on('change',function(){
+                var url = tpl.replace('{status}',$(this).val()).replace('{department}',department).replace('{page}',1);
+                console.log(url);
+                location = url;
+            });
+
+            $('#select-department').on('change',function(){
+                var url = tpl.replace('{status}',status).replace('{department}',$(this).val()).replace('{page}',1);
+                console.log(url);
+                location = url;
+            });
+
+            $('#btn-pre').on('click',function(){
+                page =  page-1 >0? page:1;
+                var url = tpl.replace('{status}',status).replace('{department}',department).replace('{page}',page);
+                console.log(url);
+                location = url;
+            });
+
+            $('#btn-next').on('click',function(){
+                page =  page + 1;
+                var url = tpl.replace('{status}',status).replace('{department}',department).replace('{page}',page);
+                console.log(url);
+                location = url;
             });
         })(jQuery);
     </script>

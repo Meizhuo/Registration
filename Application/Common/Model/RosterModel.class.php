@@ -71,7 +71,14 @@ class RosterModel extends AdvModel{
         return $this->changeStatus($roster_id,self::STATUS_UNPASS);
     }
 
-    public function listRoster($department = NULL,$status = NULL,$page=1,$limit=10){
+    /**
+     * @param null $department
+     * @param null $status
+     * @param int $page
+     * @param int $limit
+     * @return array|mixed
+     */
+    public function lists($department = NULL,$status = NULL,$page=1,$limit=10){
         $where = 'd.id=r.department ';
         if($department){
             $where .= ' AND r.department='.$department;
@@ -82,7 +89,7 @@ class RosterModel extends AdvModel{
         $result  = $this->table("enroll_roster r,enroll_department d")
                         ->field("r.*,d.department")
                         ->where($where)
-                        ->limit($page,$limit)
+                        ->limit(($page-1)*$limit,$limit)
                         ->select();
         if(!$result){
             $result = array();

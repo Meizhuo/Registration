@@ -16,18 +16,17 @@ class ConsoleController extends BaseAdminController{
 
     public function home($status = RosterModel::STATUS_WAITING,$department = 1,$page = 1,$limit = 10 ){
         $this->reqLogin();
-        //$this->assign('username',session('username'));
 
         $roster=D('Roster');
         //$department = NULL,$status = NULL,$page=1,$limit=10
-        $list=$roster->listRoster(I('get.department',1),I('get.status',3),$page,$limit);
+        $list=$roster->lists(I('get.department',1),I('get.status',1),$page,$limit);
 
         $assign['status'] = I('get.status',1);
         $assign['department'] = I('get.department',1);
         $assign['username']=session('username');
         $assign['roster_list']=$list;//把$list这整一个列表分配给roster_list
         $assign['title']='后台管理系统';
-
+        $assign['page'] = $page;
 
         $this->assign($assign);
         $this->display();
