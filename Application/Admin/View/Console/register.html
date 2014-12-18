@@ -42,6 +42,9 @@
                     password: password
                 }, function (data) {
                     console.log(data);
+                    if(data.code){
+                        location = "{:U('Admin/Console/login')}";
+                    }
                 }, 'json');
             });
         })(jQuery);
