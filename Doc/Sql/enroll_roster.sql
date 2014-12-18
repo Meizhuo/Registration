@@ -1,31 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 3.4.10.1
--- http://www.phpmyadmin.net
---
--- 主机: localhost
--- 生成日期: 2014 年 12 月 15 日 10:07
--- 服务器版本: 5.5.28
--- PHP 版本: 5.3.13
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- 数据库: `enroll`
---
-
--- --------------------------------------------------------
 
 --
 -- 表的结构 `enroll_roster`
 --
-
+DROP  TABLE IF EXISTS `enroll_roster`;
 CREATE TABLE IF NOT EXISTS `enroll_roster` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id标识号',
   `student_id` varchar(16) NOT NULL COMMENT '学号',
@@ -54,6 +31,4 @@ INSERT INTO `enroll_roster` (`id`, `student_id`, `name`, `major`, `grade`, `phon
 (8, '23333', '13123', '233333', '大一', '33333', 1, '		        		\r\n	33333	        		', 3),
 (9, '3113001234', '金正恩', '挑粪专业', '大五', '7093941230', 1, '你好，我是金正恩思密达，我是挑粪专业大五的学生，我想学习互联网技术，我要去黑奥巴马的电脑，他也会编程了我也要写，欢迎关注我的github你好，我是金正恩思密达，我是挑粪专业大五的学生，我想学习互联网技术，我要去黑奥巴马的电脑，他也会编程了我也要写，欢迎关注我的github你好，我是金正恩思密达，我是挑粪专业大五的学生，我想学习互联网技术，我要去黑奥巴马的电脑，他也会编程了我也要写，欢迎关注我的github', 3);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
