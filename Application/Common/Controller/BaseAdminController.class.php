@@ -15,7 +15,7 @@ class BaseAdminController extends Controller{
 
     public function reqLogin(){
         if(!session("?username")){
-            $this->redirect('Admin/Admin/LoginIndex');
+            $this->redirect('Admin/Console/login');
         }
         return $this;
     }
