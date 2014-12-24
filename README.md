@@ -2,6 +2,13 @@
 
 报名系统
 
+## View Router
+
+`/`
+> 工作室报名表
+
+`/home/conf`
+> 开发分享交流会报名
 
 ## Admin
 
