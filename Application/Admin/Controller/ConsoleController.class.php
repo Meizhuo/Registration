@@ -33,7 +33,7 @@ class ConsoleController extends BaseAdminController{
      * @param int $page
      * @param int $limit
      */
-    public function home($status = RosterModel::STATUS_WAITING,$department = 1,$page = 1,$limit = 10 ){
+    public function home($status = RosterModel::STATUS_WAITING,$department = 1,$page = 1,$limit = 20 ){
         $this->reqLogin();
 
         $roster=D('Roster');
