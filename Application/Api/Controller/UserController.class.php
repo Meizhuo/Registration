@@ -2,6 +2,12 @@
 namespace Api\Controller;
 
 use Common\Controller\ApiController;
+
+/**
+ * Class UserController
+ * 用户接口
+ * @package Api\Controller
+ */
 class UserController extends  ApiController{
     /**
      * 登陆

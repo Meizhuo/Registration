@@ -2,6 +2,12 @@
 namespace Common\Model;
 
 use Think\Model;
+
+/**
+ * Class AdminModel
+ * 管理员模型
+ * @package Common\Model
+ */
 class AdminModel extends Model{
     protected $_validate=array(
         array('username','require','缺少参数username',0,'regex',self::MODEL_INSERT),

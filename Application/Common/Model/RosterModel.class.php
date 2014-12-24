@@ -4,6 +4,11 @@ namespace Common\Model;
 
 use Think\Model\AdvModel;
 
+/**
+ * Class RosterModel
+ * 申请表模型
+ * @package Common\Model
+ */
 class RosterModel extends AdvModel{
     //待审
     const STATUS_WAITING = 1;
@@ -72,6 +77,7 @@ class RosterModel extends AdvModel{
     }
 
     /**
+     * 获得申请列表
      * @param null $department
      * @param null $status
      * @param int $page
