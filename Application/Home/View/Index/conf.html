@@ -1,0 +1,105 @@
+<extend name="Base/base"/>
+<block name="title">
+    邑大开发者沙龙
+</block>
+<block name="main">
+    <style>
+        body {
+            background-color: #EDEFF1;
+        }
+
+        .form {
+            border: 1px solid #DDD;
+            background: #fff;
+            border-radius: 6px;
+            padding: 8px;
+            height: auto;
+            margin-top: 14px;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+                <div class="form">
+                    <div class="form-group text-center">
+                        <h3>邑大开发交流分享会报名</h3>
+                        <hr>
+                        <div class="alert alert-success" role="alert">报名只是为了了解人数(当日直接过来,不用签到)，好让工作安排更恰当，多谢配合！</div>
+                    </div>
+                    <div class="form-group">
+                        <label>姓 名</label>
+                        <input class="form-control" id="name" placeholder="请输入真实姓名">
+                    </div>
+                    <div class="form-group">
+                        <label>专业</label>
+                        <select id="major" class="form-control">
+                            <option value="计算机科学与技术">计算机科学与技术</option>
+                            <option value="软件工程">软件工程</option>
+                            <option value="网络工程">网络工程</option>
+                            <option value="电子信息工程(信息安全)">电子信息工程(信息安全)</option>
+                            <option value="通信工程(计算机通信网络)">通信工程(计算机通信网络)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>年 级</label>
+                        <select id="grade" class="form-control">
+                            <option value="大一">大一</option>
+                            <option value="大二">大二</option>
+                            <option value="大三">大三</option>
+                            <option value="大四">大四</option>
+                        </select>
+                    </div>
+                    <button type="button" id="btn-submit" class="btn btn-default btn-lg btn-block">提 交 报 名</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/javascript">
+        var isSubmiting = false;
+        (function ($) {
+            $('#btn-submit').on('click', function () {
+                if(isSubmiting){
+                    return;
+                }
+                isSubmiting = true;
+
+                var name = $('#name').val();
+                var student_id = '0';
+                var major = $('#major').val();
+                var phone = '0';
+                var grade = $('#grade').val();
+                var department = '1';
+                var intro = 'no';
+
+                var d = {
+                    name: name,
+                    student_id: student_id,
+                    major: major,
+                    phone: phone,
+                    grade: grade,
+                    department: department,
+                    intro: intro
+                };
+                if( name === '' ){
+                    alert("姓名不能为空");
+                    return;
+                }
+                console.log(d);
+                $.post("{:U('Api/Roster/apply','','')}", d, function (data) {
+                        console.log(data);
+                        if(data.code){
+                            alert('报名成功! 12月27日(周六)北主楼16-02,与你不见不散!');
+                            location = "{:U('home/index/conf')}" ;
+                        }else{
+                            alert('报名失败，有人要要被扣工资了！');
+                        }
+                }).done(function(){
+                    isSubmiting = false;
+                });
+            });
+
+        })(jQuery);
+    </script>
+</block>
